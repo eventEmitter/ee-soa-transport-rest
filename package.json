@@ -1,0 +1,28 @@
+{
+  "name": "eb-soa-transport-rest",
+  "description": "Rest specific transport implementation.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/eventEmitter/ee-soa-transport-rest",
+  "author": "Michael Rüfenacht <ruefe@rcky.ch> (http://rcky.ch/)",
+  "licence": "mit",
+  "engines": {
+    "node": ">=v0.10.25"
+  },
+  "bugs": {
+    "url": "https://github.com/eventEmitter/ee-soa-transport-rest/issues"
+  },
+  "dependencies": {
+    "ee-class": "~0.3.0",
+    "mocha": "~1.18.2",
+    "ee-event-emitter": "~0.1.0",
+    "ee-webservice": "~0.2.0"
+  },
+  "devDependencies": {
+    "supervisor": "~0.5.7"
+  },
+  "optionalDependencies": {},
+  "keywords": [],
+  "scripts": {
+    "test": "./node_modules/.bin/mocha"
+  }
+}
