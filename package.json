@@ -15,7 +15,8 @@
     "ee-class": "~0.3.0",
     "mocha": "~1.18.2",
     "ee-event-emitter": "~0.1.0",
-    "ee-webservice": "~0.2.0"
+    "ee-webservice": "~0.2.0",
+    "ee-log": "~0.2.17"
   },
   "devDependencies": {
     "supervisor": "~0.5.7"
