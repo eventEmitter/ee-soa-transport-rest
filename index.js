@@ -1,3 +1,8 @@
+/**
+ * todo: add dependencies to ee-soa-request and ee-rest-headers
+ * @type {exports}
+ */
+
 var WebService = require('ee-webservice'),
     HTTPTransport = require('./lib/HTTPTransport');
 
@@ -10,12 +15,10 @@ function showPropertiesOf(instance){
         console.log(buffer);
     }
 }
-
-var service = new WebService({host: 'localhost', port:20000, interface: WebService.IF_ANY }),
+var service = new WebService({port:20000, interface: WebService.IF_ANY }),
     transport = new HTTPTransport(service);
 
-    transport.useTransport();
-
-service.listen(function(){
-    console.log('what');
+transport.onLoad(function(){
+    service.listen();
 });
+transport.useTransport();
