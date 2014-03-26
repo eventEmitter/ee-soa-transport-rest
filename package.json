@@ -12,11 +12,14 @@
     "url": "https://github.com/eventEmitter/ee-soa-transport-rest/issues"
   },
   "dependencies": {
-    "ee-class": "~0.3.0",
+    "ee-class": "0.3.*",
     "mocha": "~1.18.2",
-    "ee-event-emitter": "~0.1.0",
-    "ee-webservice": "~0.2.0",
-    "ee-log": "~0.2.17"
+    "ee-event-emitter": "0.1.*",
+    "ee-webservice": "0.2.*",
+    "ee-log": "0.2.*",
+    "ee-rest-headers": "git://github.com/eventEmitter/ee-rest-headers",
+    "ee-soa-request": "git://github.com/eventEmitter/ee-soa-request",
+    "em-formdata-collector": "0.1.*"
   },
   "devDependencies": {
     "supervisor": "~0.5.7"
