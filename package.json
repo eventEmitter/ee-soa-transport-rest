@@ -18,7 +18,7 @@
     "ee-webservice": "0.2.*",
     "ee-log": "0.2.*",
     "ee-rest-headers": "git://github.com/eventEmitter/ee-rest-headers",
-    "ee-soa-request": "git://github.com/eventEmitter/ee-soa-request",
+    "ee-soa-request": "*",
     "em-formdata-collector": "0.1.*"
   },
   "devDependencies": {
@@ -27,6 +27,6 @@
   "optionalDependencies": {},
   "keywords": [],
   "scripts": {
-    "test": "./node_modules/.bin/mocha"
+    "test": "./node_modules/.bin/mocha --reporter spec"
   }
 }
