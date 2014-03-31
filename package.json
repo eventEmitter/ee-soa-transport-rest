@@ -17,10 +17,10 @@
     "ee-event-emitter": "0.1.*",
     "ee-webservice": "0.2.*",
     "ee-log": "0.2.*",
-    "ee-rest-headers": "*",
-    "ee-soa-request": "*",
     "ee-types": "*",
-    "em-formdata-collector": "0.1.*"
+    "em-formdata-collector": "0.1.*",
+    "ee-rest-headers": "git://github.com/eventEmitter/ee-rest-headers",
+    "ee-soa-request": "git://github.com/eventEmitter/ee-soa-request"
   },
   "devDependencies": {
     "supervisor": "~0.5.7"
