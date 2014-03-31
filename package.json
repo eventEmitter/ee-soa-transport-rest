@@ -1,5 +1,5 @@
 {
-  "name": "eb-soa-transport-rest",
+  "name": "ee-soa-transport-rest",
   "description": "Rest specific transport implementation.",
   "version": "0.1.0",
   "homepage": "https://github.com/eventEmitter/ee-soa-transport-rest",
