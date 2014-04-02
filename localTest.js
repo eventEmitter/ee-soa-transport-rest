@@ -19,6 +19,9 @@ var service = new WebService({port:20000, interface: WebService.IF_ANY }),
     transport = new HTTPTransport(service);
 
 transport.onLoad(function(){
+    transport.on('request', function(request, response){
+        console.log(request);
+    });
     service.listen();
 });
 transport.useTransport();
