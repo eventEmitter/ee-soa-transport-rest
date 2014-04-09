@@ -3,8 +3,8 @@
  * @type {exports}
  */
 
-var WebService = require('ee-webservice'),
-    HTTPTransport = require('./lib/HTTPTransport');
+var WebService      = require('ee-webservice'),
+    HTTPTransport   = require('./lib/HTTPTransport');
 
 function showPropertiesOf(instance){
     for(var property in instance){
@@ -15,12 +15,12 @@ function showPropertiesOf(instance){
         console.log(buffer);
     }
 }
-var service = new WebService({port:20000, interface: WebService.IF_ANY }),
-    transport = new HTTPTransport(service);
+var service     = new WebService({port:20000, interface: WebService.IF_ANY }),
+    transport   = new HTTPTransport(service);
 
-transport.onLoad(function(){
-    transport.on('request', function(request, response){
-        response.send(200, {});
+transport.onLoad( function() {
+    transport.on('request', function(request, response) {
+        response.send(response.status.TARGET_NOT_FOUND, {});
     });
     service.listen();
 });
