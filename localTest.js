@@ -2,7 +2,6 @@
  * todo: add dependencies to ee-soa-request and ee-rest-headers
  * @type {exports}
  */
-
 var WebService      = require('ee-webservice'),
     HTTPTransport   = require('./lib/HTTPTransport');
 

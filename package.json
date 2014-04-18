@@ -12,7 +12,7 @@
     "url": "https://github.com/eventEmitter/ee-soa-transport-rest/issues"
   },
   "dependencies": {
-    "ee-class": "0.3.*",
+    "ee-class": "*",
     "mocha": "~1.18.2",
     "ee-event-emitter": "0.1.*",
     "ee-webservice": "0.2.*",
