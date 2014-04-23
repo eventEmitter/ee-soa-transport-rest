@@ -2,8 +2,8 @@ var assert          = require('assert');
 
 var MockRequest     = require('./testutil/HTTPMockRequest')
     , MockResponse  = require('./testutil/HTTPMockResponse')
-    , factories     = require('../lib/factory');
-
+    , factories     = require('../lib/factory')
+    , SOARequestHeaders = require('ee-rest-headers');
 
 var GetRequest = new MockRequest()
     .setMethod('GET')
@@ -27,7 +27,6 @@ var GetRequestComplex = new MockRequest()
     .setHeader('Accept-language', [{key:'en'}, {key:'de'}])
     .setHeader('Api-Version', '2.0')
     .setHeader('Filter', 'location.address.postalcode > 4500, location.address.postalcode < 4500, deleted = null');
-
 
 describe('HTTPRequestFactory', function(){
     var factory = new factories.HTTPRequestFactory();
@@ -101,10 +100,12 @@ describe('HTTPRequestFactory', function(){
             });
         });
 
-        describe('on GET complex (with filters, selects and ordering)', function(){
-            factory.createUnifiedRequest(GetRequestComplex, function(err, request){
-                it('should have filters', function(){
-                    assert(request.hasFilters());
+        describe('on GET complex (with filters, selects and ordering), depends on the the request middleware', function(){
+            new SOARequestHeaders.Middleware().request(GetRequestComplex, null, function(){
+                factory.createUnifiedRequest(GetRequestComplex, function(err, request){
+                    it('should have filters', function(){
+                        assert(request.hasFilters());
+                    });
                 });
             });
         });

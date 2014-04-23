@@ -35,7 +35,7 @@ var HTTPMockRequest = {
     , getHeader: function(key, parseheader){
         key = key.toLowerCase();
         parseheader = parseheader === true;
-        return this.headers[key];
+        return (key in this.headers) ? this.headers[key] : null;
     }
 
     , setHeader: function(key, header){
