@@ -9,6 +9,7 @@ var GetRequest = new MockRequest()
     .setMethod('GET')
     .setPathname('/event/10')
     .setHeader('Accept', [{key:'Application', value:'JSON'}])
+    .setHeader('Authorization', ' ee-simple aSupercomplexToken ')
     .setHeader('Accept-language', [{key:'en'}, {key:'de'}])
     .setHeader('Api-Version', '2.0')
     .setHeader('Range', '10-20');
@@ -16,6 +17,7 @@ var GetRequest = new MockRequest()
 var GetRequestCollection = new MockRequest()
     .setMethod('GET')
     .setPathname('/event')
+    .setHeader('Authorization', ' ee-simple token with whitespace')
     .setHeader('Accept', [{key:'Application', value:'JSON'}])
     .setHeader('Accept-language', [{key:'en'}, {key:'de'}])
     .setHeader('Api-Version', '2.0');
@@ -84,6 +86,12 @@ describe('HTTPRequestFactory', function(){
                     assert.equal(20, request.getRange().to);
                 });
 
+                it('should have authorization set if present', function(){
+                    assert(request.hasAccessToken());
+                    assert.equal('ee-simple', request.getAccessToken().type);
+                    assert.equal('aSupercomplexToken', request.getAccessToken().value);
+                });
+
             });
         });
 
@@ -96,6 +104,11 @@ describe('HTTPRequestFactory', function(){
 
                 it('should therefore query a collection', function(){
                     assert(request.queriesCollection());
+                });
+
+                it('should concatenate access tokens containing whitespace', function(){
+                    assert(request.hasAccessToken());
+                    assert.equal('token with whitespace', request.getAccessToken().value);
                 });
             });
         });
