@@ -87,9 +87,9 @@ describe('HTTPRequestFactory', function(){
                 });
 
                 it('should have authorization set if present', function(){
-                    assert(request.hasAccessToken());
-                    assert.equal('ee-simple', request.getAccessToken().type);
-                    assert.equal('aSupercomplexToken', request.getAccessToken().value);
+                    assert(request.hasRequestToken());
+                    assert.equal('ee-simple', request.getRequestToken().type);
+                    assert.equal('aSupercomplexToken', request.getRequestToken().value);
                 });
 
             });
@@ -107,8 +107,8 @@ describe('HTTPRequestFactory', function(){
                 });
 
                 it('should concatenate access tokens containing whitespace', function(){
-                    assert(request.hasAccessToken());
-                    assert.equal('token with whitespace', request.getAccessToken().value);
+                    assert(request.hasRequestToken());
+                    assert.equal('token with whitespace', request.getRequestToken().value);
                 });
             });
         });
