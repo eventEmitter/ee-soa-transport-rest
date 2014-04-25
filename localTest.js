@@ -19,6 +19,7 @@ var service     = new WebService({port:20000, interface: WebService.IF_ANY }),
 
 transport.onLoad( function() {
     transport.on('request', function(request, response) {
+        console.log(request);
         response.send(response.status.TARGET_NOT_FOUND, {});
     });
     service.listen();
