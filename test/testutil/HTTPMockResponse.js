@@ -4,11 +4,10 @@
  *
  */
 
-var Class = require('ee-class');
 
-var HTTPMockResponse = {
-    send: function(){
+var HTTPMockResponse = function(){
+    this.send = function(){
     }
 };
 
-module.exports = new Class(HTTPMockResponse);
+module.exports = HTTPMockResponse;

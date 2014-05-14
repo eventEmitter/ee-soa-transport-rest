@@ -4,58 +4,51 @@
  *
  */
 
-var Class = require('ee-class');
+var HTTPMockRequest = function(){
 
-var HTTPMockRequest = {
-
-    headers: {}
-    , payload: null
-    , method: 'GET'
-    , pathname: ''
+    this.headers =  {};
+    this.payload =  null;
+    this.method =  'GET';
+    this.pathname =  '';
 
 
-    , getPathname: function(){
+    this.getPathname =  function(){
         return this.pathname;
-    }
+    };
 
-    , setPathname: function(pathname){
+    this.setPathname =  function(pathname){
         this.pathname = pathname;
         return this;
-    }
+    };
 
-    , getMethod: function(){
+    this.getMethod =  function(){
         return this.method;
-    }
+    };
 
-    , setMethod: function(method){
+    this.setMethod =  function(method){
         this.method = method;
         return this;
-    }
+    };
 
-    , getHeader: function(key, parseheader){
+    this.getHeader =  function(key, parseheader){
         key = key.toLowerCase();
         parseheader = parseheader === true;
-        return (key in this.headers) ? this.headers[key] : null;
-    }
+        return (key in this.headers) ? this.headers[key]  :  null;
+    };
 
-    , setHeader: function(key, header){
+    this.setHeader =  function(key, header){
         this.headers[key.toLowerCase()] = header;
         return this;
-    }
+    };
 
-    , setFormdata: function(data){
+    this.setFormdata =  function(data){
         this.payload = data;
         return this;
-    }
+    };
 
-    , getForm: function(callback){
+    this.getForm =  function(callback){
         callback(null, this.payload);
-    }
-
-
-
-
-
+    };
 };
 
-module.exports = new Class(HTTPMockRequest);
+module.exports = HTTPMockRequest;

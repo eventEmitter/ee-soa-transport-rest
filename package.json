@@ -1,7 +1,7 @@
 {
     "name": "ee-soa-transport-rest",
     "description": "Rest specific transport implementation.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "homepage": "https://github.com/eventEmitter/ee-soa-transport-rest",
     "author": "Michael Rüfenacht <ruefe@rcky.ch> (http://rcky.ch/)",
     "licence": "MIT",
@@ -16,22 +16,20 @@
         "url"   : "https://github.com/eventEmitter/ee-soa-transport-rest/issues"
     },
     "dependencies": {
-        "ee-class"  : "0.4.*",
-        "mocha"     : "~1.18.2",
+        "ee-class"  : "1.0.*",
+        "mocha"     : "1.18.*",
         "ee-event-emitter"  : "0.1.*",
         "ee-webservice"     : "0.2.*",
         "ee-log"            : "0.2.*",
-        "ee-types"          : "*",
+        "ee-types"          : "0.1.*",
         "em-formdata-collector" : "0.1.*",
         "ee-rest-headers"       : "git://github.com/eventEmitter/ee-rest-headers",
-        "ee-soa-request"        : "git://github.com/eventEmitter/ee-soa-request"
-    },
-    "devDependencies": {
-        "supervisor": "~0.5.7"
+        "ee-soa-request"        : "git://github.com/eventEmitter/ee-soa-request",
+        "ee-templates"          : "git://github.com/eventEmitter/ee-templates"
     },
     "optionalDependencies": {},
     "keywords": [],
     "scripts": {
-        "test": "./node_modules/.bin/mocha --reporter spec"
+        "test": "./node_modules/.bin/mocha --reporter spec --check-leaks"
     }
 }

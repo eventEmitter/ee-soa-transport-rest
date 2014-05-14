@@ -87,7 +87,6 @@ describe('HTTPRequestFactory', function(){
                 });
 
                 it('should have authorization set if present', function(){
-                    assert(request.hasRequestToken());
                     assert.equal('ee-simple', request.getRequestToken().type);
                     assert.equal('aSupercomplexToken', request.getRequestToken().value);
                 });
