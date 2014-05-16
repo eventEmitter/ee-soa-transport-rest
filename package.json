@@ -25,7 +25,8 @@
         "em-formdata-collector" : "0.1.*",
         "ee-rest-headers"       : "git://github.com/eventEmitter/ee-rest-headers",
         "ee-soa-request"        : "git://github.com/eventEmitter/ee-soa-request",
-        "ee-templates"          : "git://github.com/eventEmitter/ee-templates"
+        "ee-templates"          : "git://github.com/eventEmitter/ee-templates",
+        "ee-request-rewrite"    : "git://github.com/eventEmitter/ee-soa-transport-rewrite"
     },
     "optionalDependencies": {},
     "keywords": [],
