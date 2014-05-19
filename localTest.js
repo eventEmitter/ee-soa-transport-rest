@@ -11,7 +11,6 @@ transport.on('loading_error', function(err){
 });
 
 transport.on('request', function(request, response) {
-    console.log('called');
     // hook in your service here!
     response.send(response.status.OK, {message: 'Yaaay'});
 });
