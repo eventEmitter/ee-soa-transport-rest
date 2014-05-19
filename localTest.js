@@ -1,10 +1,10 @@
+var Cornercard = require('cornercard-frontend');
 /**
- * todo: add dependencies to ee-soa-request and ee-rest-headers
  * @type {exports}
  */
 var HTTPTransport   = require('./lib/HTTPTransport');
 var websites        = [];
-var transport       = new HTTPTransport({port:8080, interface: 5 }, websites);
+var transport       = new HTTPTransport({port:8080, interface: 5 }, [new Cornercard()]);
 
 transport.on('loading_error', function(err){
     console.log(err);
@@ -12,10 +12,11 @@ transport.on('loading_error', function(err){
 
 transport.on('request', function(request, response) {
     // hook in your service here!
-    response.send(response.status.OK, {message: 'Yaaay'});
+    response.send(response.statusCodes.OK, {message: 'Yaaay'});
 });
 
-transport.onLoad(function() {
+transport.onLoad(function(err) {
+    console.log('loaded');
     transport.listen();
 });
 
