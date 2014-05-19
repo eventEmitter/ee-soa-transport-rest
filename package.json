@@ -1,39 +1,41 @@
 {
-  "name": "ee-soa-transport-rest",
-  "description": "Rest specific transport implementation.",
-  "version": "0.1.1",
-  "homepage": "https://github.com/eventEmitter/ee-soa-transport-rest",
-  "author": "Michael Rüfenacht <ruefe@rcky.ch> (http://rcky.ch/)",
-  "licence": "MIT",
-  "engines": {
-    "node": ">=v0.10.25"
-  },
-  "repository": {
-    "url": "https://github.com/eventEmitter/ee-soa-transport-rest",
-    "type": "git"
-  },
-  "bugs": {
-    "url": "https://github.com/eventEmitter/ee-soa-transport-rest/issues"
-  },
-  "dependencies": {
-    "ee-class": "1.0.*",
-    "mocha": "1.18.*",
-    "ee-event-emitter": "0.1.*",
-    "ee-webservice": "0.3.*",
-    "ee-log": "0.2.*",
-    "ee-types": "0.1.*",
-    "em-formdata-collector": "0.1.*",
-    "ee-rest-headers": "git://github.com/eventEmitter/ee-rest-headers",
-    "ee-soa-request": "git://github.com/eventEmitter/ee-soa-request",
-    "ee-templates": "git://github.com/eventEmitter/ee-templates",
-    "ee-request-rewrite": "git://github.com/eventEmitter/ee-soa-transport-rewrite",
-    "ee-soa-website": "0.1.*",
-    "ee-soa-transport": "0.1.*",
-    "ee-soa-response": "0.1.*"
-  },
-  "optionalDependencies": {},
-  "keywords": [],
-  "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec --check-leaks"
-  }
+      "name"                            : "ee-soa-transport-rest"
+    , "description"                     : "Rest specific transport implementation."
+    , "version"                         : "0.1.1"
+    , "homepage"                        : "https://github.com/eventEmitter/ee-soa-transport-rest"
+    , "author"                          : "Michael Rüfenacht <ruefe@rcky.ch> (http://rcky.ch/)"
+    , "licence"                         : "MIT"
+    , "engines": {
+        "node"                          : ">=v0.10.25"
+    }
+    , "repository": {
+          "url"                         : "https://github.com/eventEmitter/ee-soa-transport-rest"
+        , "type"                        : "git"
+    }
+    , "bugs": {
+        "url"                           : "https://github.com/eventEmitter/ee-soa-transport-rest/issues"
+    }
+    , "dependencies": {
+          "ee-class"                    : "1.0.*"
+        , "ee-event-emitter"            : "0.1.*"
+        , "ee-webservice"               : "0.3.*"
+        , "ee-log"                      : "0.2.*"
+        , "ee-types"                    : "0.1.*"
+        , "em-formdata-collector"       : "0.1.*"
+        , "ee-rest-headers"             : "0.1.x"
+        , "ee-soa-request"              : "0.2.x"
+        , "ee-templates"                : "0.1.x"
+        , "ee-soa-transport-rewrite"    : "0.1.x"
+        , "ee-soa-website"              : "0.1.*"
+        , "ee-soa-transport"            : "0.1.*"
+        , "ee-soa-response"             : "0.1.*"
+    }
+    , "devDependencies": {        
+          "mocha"                       : "1.18.*"
+    }
+    , "optionalDependencies"            : {}
+    , "keywords"                        : []
+    , "scripts": {
+        "test"                          : "./node_modules/.bin/mocha --reporter spec --check-leaks"
+    }
 }
