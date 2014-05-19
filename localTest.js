@@ -16,7 +16,6 @@ transport.on('request', function(request, response) {
 });
 
 transport.onLoad(function(err) {
-    console.log('loaded');
     transport.listen();
 });
 
