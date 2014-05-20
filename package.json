@@ -17,6 +17,7 @@
     }
     , "dependencies": {
           "ee-class"                    : "1.0.*"
+        , "ee-async"                    : "0.2.*"
         , "ee-event-emitter"            : "0.1.*"
         , "ee-webservice"               : "0.3.*"
         , "ee-log"                      : "0.2.*"
