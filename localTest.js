@@ -1,4 +1,5 @@
-var Cornercard = require('cornercard-frontend');
+var Cornercard  = require('cornercard-frontend'),
+    log         = require('ee-log');
 /**
  * @type {exports}
  */
@@ -11,6 +12,8 @@ transport.on('loading_error', function(err){
 });
 
 transport.on('request', function(request, response) {
+    log(request.getParameters());
+
     response.send(response.statusCodes.OK, {message: 'Yaaay'});
 });
 
