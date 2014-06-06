@@ -33,10 +33,11 @@
     }
     , "devDependencies": {        
           "mocha"                       : "1.18.*"
+        , "ee-webserver"                : "0.3.*"
     }
     , "optionalDependencies"            : {}
     , "keywords"                        : []
     , "scripts": {
-        "test"                          : "./node_modules/.bin/mocha --reporter spec --check-leaks"
+        "test"                          : "./node_modules/.bin/mocha --reporter spec"
     }
 }

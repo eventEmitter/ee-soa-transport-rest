@@ -1,8 +1,10 @@
 var assert          = require('assert');
 
-var MockRequest     = require('./testutil/HTTPMockRequest')
-    , MockResponse  = require('./testutil/HTTPMockResponse')
-    , factories     = require('../lib/factory')
+var testUtil        = require('./testutil')
+    , MockRequest   = testUtil.HTTPMockRequest
+    , MockResponse  = testUtil.HTTPMockResponse
+
+    , factories         = require('../lib/factory')
     , SOARequestHeaders = require('ee-rest-headers');
 
 var GetRequest = new MockRequest()

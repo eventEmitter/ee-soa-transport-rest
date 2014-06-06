@@ -7,7 +7,7 @@ var HTTPTransport   = require('./lib/HTTPTransport');
 var websites        = [];
 var transport       = new HTTPTransport({port:8080, interface: 5 }, [new Cornercard()]);
 
-transport.on('loading_error', function(err){
+transport.on('load', function(err){
     console.log(err);
 });
 

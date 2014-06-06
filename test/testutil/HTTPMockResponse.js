@@ -7,6 +7,7 @@
 
 var HTTPMockResponse = function(){
     this.send = function(){
+
     }
 };
 
