@@ -154,7 +154,7 @@ describe('HTTPTransport', function() {
         var options     = getOptions();
         options.url     = '/api/';
         options.headers.accept = 'application/json;q=1';
-        options.headers.order = 'thing.id, category.location.title DESC';
+        options.headers.order = 'thing.id, category.location.title DESC, category.location.postalcode';
 
         var   mockRequest   = new Webserver.testing.MockRequest(options)
             , testRequest   = new Webserver.Request({request: mockRequest})
@@ -176,7 +176,8 @@ describe('HTTPTransport', function() {
                     }
                     , category: {
                         location: {
-                            title: 'DESC'
+                              title: 'DESC'
+                            , postalcode: 'ASC'
                         }
                     }
                 };
