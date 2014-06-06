@@ -148,4 +148,42 @@ describe('HTTPTransport', function() {
             transport.testRequest(testRequest, testResponse);
         });
     });
+
+    describe('Order Headers Test', function(){
+        // now we simulate requests to an api, therefore we need different rewrites
+        var options     = getOptions();
+        options.url     = '/api/';
+        options.headers.accept = 'application/json;q=1';
+        options.headers.order = 'thing.id, category.location.title DESC';
+
+        var   mockRequest   = new Webserver.testing.MockRequest(options)
+            , testRequest   = new Webserver.Request({request: mockRequest})
+
+            , responseOptions = {}
+            , mockResponse  = new Webserver.testing.MockResponse(responseOptions)
+            , testResponse  = new Webserver.Response({request: testRequest, response: mockResponse});
+
+        it("should load without errors", function(done){
+            transport.onLoad(done);
+            transport.useTransport();
+        });
+
+        it("should parse the order headers", function(done){
+            transport.on('request', function(req, res){
+                var expected = {
+                    thing: {
+                        id: 'ASC'
+                    }
+                    , category: {
+                        location: {
+                            title: 'DESC'
+                        }
+                    }
+                };
+                assert.deepEqual(req.getOrder(), expected);
+                done();
+            });
+            transport.testRequest(testRequest, testResponse);
+        });
+    });
 });
