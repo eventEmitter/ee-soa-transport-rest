@@ -1,7 +1,7 @@
 {
       "name"                            : "ee-soa-transport-rest"
     , "description"                     : "Rest specific transport implementation."
-    , "version"                         : "0.1.15"
+    , "version"                         : "0.1.16"
     , "homepage"                        : "https://github.com/eventEmitter/ee-soa-transport-rest"
     , "author"                          : "Michael Rüfenacht <ruefe@rcky.ch> (http://rcky.ch/)"
     , "licence"                         : "MIT"

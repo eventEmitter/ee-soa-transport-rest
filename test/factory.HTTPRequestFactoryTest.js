@@ -32,6 +32,12 @@ var GetRequestComplex = new MockRequest()
     .setHeader('Api-Version', '2.0')
     .setHeader('Filter', 'location.address.postalcode > 4500, location.address.postalcode < 4500, deleted = null');
 
+var DeleteRequestRelated = new MockRequest()
+    .setMethod('DELETE')
+    .setPathname('/event/10/image/5')
+    .setHeader('Accept-language', [{key:'en'}, {key:'de'}])
+    .setHeader('Accept', [{key:'Application', value:'JSON'}]);
+
 describe('HTTPRequestFactory', function(){
     var factory = new factories.HTTPRequestFactory();
 
@@ -120,6 +126,22 @@ describe('HTTPRequestFactory', function(){
                     it('should have filters', function(){
                         assert(request.hasFilters());
                     });
+                });
+            });
+        });
+
+        describe('on DELETE related', function(){
+            factory.createUnifiedRequest(DeleteRequestRelated, function(err, request){
+
+                it('should have a resource id', function(){
+                    assert(request.hasResourceId());
+                });
+
+                it('should set a related to', function(){
+                    assert(request.hasRelatedTo());
+                    console.log(request.getRelatedTo());
+                    console.log(request.getCollection());
+                    console.log(request.getResourceId());
                 });
             });
         });
