@@ -13,8 +13,9 @@ function getOptions(){
     return {
         host: 'test.local'
         , headers: {
-            "accept-language":  'de',
-            "accept":           'text/html;q=1'
+              "accept-language":  'de'
+            , "accept":           'text/html;q=1'
+            , "api-version":      1
         }
         , remoteAddress: '127.0.0.2'
         , url: '/'
@@ -144,7 +145,6 @@ describe('HTTPTransport', function() {
                     done(err);
                 }
             }.bind(mockResponse));
-
             transport.testRequest(testRequest, testResponse);
         });
     });
@@ -161,7 +161,10 @@ describe('HTTPTransport', function() {
 
             , responseOptions = {}
             , mockResponse  = new Webserver.testing.MockResponse(responseOptions)
-            , testResponse  = new Webserver.Response({request: testRequest, response: mockResponse});
+            , testResponse  = new Webserver.Response({
+                                          request: testRequest
+                                        , response: mockResponse
+                                    });
 
         it("should load without errors", function(done){
             transport.onLoad(done);

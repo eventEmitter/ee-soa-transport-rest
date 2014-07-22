@@ -16,6 +16,15 @@ var GetRequest = new MockRequest()
     .setHeader('Api-Version', '2.0')
     .setHeader('Range', '10-20');
 
+var GetRequestNonNumericId = new MockRequest()
+    .setMethod('GET')
+    .setPathname('/event/10/shoppingcart/adlskdfj2343')
+    .setHeader('Accept', [{key:'Application', value:'JSON'}])
+    .setHeader('Authorization', ' ee-simple aSupercomplexToken ')
+    .setHeader('Accept-language', [{key:'en'}, {key:'de'}])
+    .setHeader('Api-Version', '2.0')
+    .setHeader('Range', '10-20');
+
 var GetRequestCollection = new MockRequest()
     .setMethod('GET')
     .setPathname('/event')
@@ -123,26 +132,40 @@ describe('HTTPRequestFactory', function(){
         describe('on GET complex (with filters, selects and ordering), depends on the the request middleware', function(){
             new SOARequestHeaders.Middleware().request(GetRequestComplex, null, function(){
                 factory.createUnifiedRequest(GetRequestComplex, function(err, request){
-                    it('should have filters', function(){
+                    it('should have filters', function(done){
                         assert(request.hasFilters());
+                        done();
                     });
                 });
             });
         });
 
-        describe('on DELETE related', function(){
-            factory.createUnifiedRequest(DeleteRequestRelated, function(err, request){
-
+        describe('on GET whit non numerical IDs', function(){
+            factory.createUnifiedRequest(GetRequestNonNumericId, function(err, request){
                 it('should have a resource id', function(){
-                    assert(request.hasResourceId());
+                    assert(!request.queriesCollection());
+                    assert.equal('adlskdfj2343', request.getResourceId());
                 });
+            });
+        });
 
-                it('should set a related to', function(){
-                    assert(request.hasRelatedTo());
-                    console.log(request.getRelatedTo());
-                    console.log(request.getCollection());
-                    console.log(request.getResourceId());
+        describe('on DELETE related', function(){
+            var error, req;
+            it('should have a resource id', function(done){
+                factory.createUnifiedRequest(DeleteRequestRelated, function(err, request){
+                    error   = err;
+                    req     = request;
+
+                    assert(request.hasResourceId());
+                    done();
                 });
+            });
+
+            it('should set a related to', function(){
+                    assert(req.hasRelatedTo());
+                    assert.deepEqual({model:'event',id:'10'}, req.getRelatedTo());
+                    assert.equal('image', req.getCollection());
+                    assert.equal(5, req.getResourceId());
             });
         });
     });
