@@ -2,6 +2,8 @@ var   assert    = require('assert')
     , log       = require('ee-log')
     , Webserver = require('ee-webserver');
 
+process.env.testRunner = true;
+
 var HTTPTransport   = require('../lib/HTTPTransport');
 
 var   testUtil      = require('./testutil')
