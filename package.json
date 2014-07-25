@@ -30,6 +30,7 @@
         , "ee-soa-website"              : "0.1.*"
         , "ee-soa-transport"            : "0.1.*"
         , "ee-soa-response"             : "0.1.*"
+        , "ee-argv"                     : "0.1.x"
     }
     , "devDependencies": {        
           "mocha"                       : "1.18.*"
