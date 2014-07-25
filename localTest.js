@@ -12,8 +12,8 @@ transport.on('load', function(err){
 });
 
 transport.on('request', function(request, response) {
-    log(request);
-    response.send(response.statusCodes.OK, {message: 'Yaaay'});
+    // just send a message back
+    response.send(response.statusCodes.ACCESS_UNAUTHORIZED, {message: 'Yaaay'});
 });
 
 transport.onLoad(function(err) {

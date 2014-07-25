@@ -162,10 +162,10 @@ describe('HTTPRequestFactory', function(){
             });
 
             it('should set a related to', function(){
-                    assert(req.hasRelatedTo());
-                    assert.deepEqual({model:'event',id:'10'}, req.getRelatedTo());
-                    assert.equal('image', req.getCollection());
-                    assert.equal(5, req.getResourceId());
+                assert(req.hasRelatedTo());
+                assert.deepEqual({model:'event',id:'10'}, req.getRelatedTo());
+                assert.equal('image', req.getCollection());
+                assert.equal(5, req.getResourceId());
             });
         });
     });
