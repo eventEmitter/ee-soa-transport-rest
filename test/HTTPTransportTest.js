@@ -73,6 +73,10 @@ describe('HTTPTransport', function() {
             assert.equal(mockResponse.headers['content-type'], 'text/html; charset=utf-8');
             assert.equal(responseData, '<h1>Test Nullpath de</h1>');
         });
+
+        it("should add a cache control header", function(){
+            assert.equal(mockResponse.headers['cache-control'], 'no-transform');
+        });
     });
 
     describe('Api Requests HTML', function(){
