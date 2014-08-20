@@ -1,5 +1,6 @@
 var   assert    = require('assert')
     , log       = require('ee-log')
+    , Class     = require('ee-class')
     , Webserver = require('ee-webserver');
 
 process.env.testRunner = true;
@@ -10,6 +11,11 @@ var   testUtil      = require('./testutil')
     , TestWebsite   = testUtil.MockWebsite;
 
 process.env.EE_ENV_TESTING = true;
+
+var Err = new Class({
+
+    inherits: Error
+});
 
 function getOptions(){
     return {
@@ -27,13 +33,16 @@ function getOptions(){
 
 describe('HTTPTransport', function() {
 
-    var transport = new HTTPTransport({interface: 5, port:'8080'});
-        transport.use(new TestWebsite());
-
-        transport.on('request', function(request, response){
+    var   transport = new HTTPTransport({interface: 5, port:'8080'})
+        , listener = function(request, response){
             // just send the request back with some data
             response.send(response.statusCodes.OK, {test: 'succeeded'});
-        });
+        };
+        transport.use(new TestWebsite());
+
+
+
+        transport.on('request', listener);
 
     describe('Null Path Requests', function(){
 
@@ -72,6 +81,10 @@ describe('HTTPTransport', function() {
             assert.equal(mockResponse.status, 200);
             assert.equal(mockResponse.headers['content-type'], 'text/html; charset=utf-8');
             assert.equal(responseData, '<h1>Test Nullpath de</h1>');
+        });
+
+        it("should add a cache control header", function(){
+            assert.equal(mockResponse.headers['cache-control'], 'no-transform');
         });
     });
 
@@ -174,19 +187,55 @@ describe('HTTPTransport', function() {
         });
 
         it("should parse the order headers", function(done){
-            transport.on('request', function(req, res){
-                var expected = {
-                    thing: {
-                        id: 'ASC'
-                    }
-                    , category: {
-                        location: {
-                              title: 'DESC'
-                            , postalcode: 'ASC'
+            transport.off('request');
+            transport.on('request', function(req, response){
+                var order = {
+                    api: {
+                        thing: {
+                            id: "ASC"
+                        }
+                        , category: {
+                            location: {
+                                title: "DESC"
+                                , postalcode: "ASC"
+                            }
                         }
                     }
                 };
-                assert.deepEqual(req.getOrder(), expected);
+
+                assert.deepEqual(order, req.getOrder());
+                done();
+            });
+            transport.testRequest(testRequest, testResponse);
+        });
+    });
+
+    describe('Select Headers Test', function(){
+        var options     = getOptions();
+        options.url     = '/api/';
+        options.headers.accept = 'application/json;q=1';
+        options.headers.select = 'thing.id, location.title, location.city.postalcode, id, version';
+
+        var   mockRequest   = new Webserver.testing.MockRequest(options)
+            , testRequest   = new Webserver.Request({request: mockRequest})
+
+            , responseOptions = {}
+            , mockResponse  = new Webserver.testing.MockResponse(responseOptions)
+            , testResponse  = new Webserver.Response({
+                request: testRequest
+                , response: mockResponse
+            });
+
+        it("should load without errors", function(done){
+            transport.onLoad(done);
+            transport.useTransport();
+        });
+
+        it("should parse the select headers", function(done){
+            transport.off('request');
+            transport.on('request', function(req, res){
+                var test = null;
+                assert(req.hasSubRequests());
                 done();
             });
             transport.testRequest(testRequest, testResponse);
