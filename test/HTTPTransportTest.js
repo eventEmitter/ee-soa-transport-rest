@@ -190,15 +190,13 @@ describe('HTTPTransport', function() {
             transport.off('request');
             transport.on('request', function(req, response){
                 var order = {
-                    api: {
-                        thing: {
-                            id: "ASC"
-                        }
-                        , category: {
-                            location: {
-                                title: "DESC"
-                                , postalcode: "ASC"
-                            }
+                    thing: {
+                        id: "ASC"
+                    }
+                    , category: {
+                        location: {
+                            title: "DESC"
+                            , postalcode: "ASC"
                         }
                     }
                 };
@@ -211,6 +209,7 @@ describe('HTTPTransport', function() {
     });
 
     describe('Select Headers Test', function(){
+
         var options     = getOptions();
         options.url     = '/api/';
         options.headers.accept = 'application/json;q=1';
@@ -234,8 +233,14 @@ describe('HTTPTransport', function() {
         it("should parse the select headers", function(done){
             transport.off('request');
             transport.on('request', function(req, res){
-                var test = null;
+
                 assert(req.hasSubRequests());
+
+                var   subrequests   = req.getSubRequests()
+                    , firstLevel    = subrequests[0];
+
+                assert.equal(firstLevel.getCollection(), 'thing');
+
                 done();
             });
             transport.testRequest(testRequest, testResponse);
