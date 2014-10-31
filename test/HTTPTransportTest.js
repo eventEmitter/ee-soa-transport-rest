@@ -213,6 +213,7 @@ describe('HTTPTransport', function() {
         var options     = getOptions();
         options.url     = '/api/';
         options.headers.accept = 'application/json;q=1';
+        options.headers.filter = 'eventData.artist.id!=null';
         options.headers.select = 'thing.id, location.title, location.city.postalcode, id, version';
 
         var   mockRequest   = new Webserver.testing.MockRequest(options)
