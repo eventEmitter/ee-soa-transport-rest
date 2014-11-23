@@ -1,4 +1,5 @@
-var assert          = require('assert');
+var   assert        = require('assert')
+    , log           = require('ee-log');
 
 var testUtil        = require('./testutil')
     , MockRequest   = testUtil.HTTPMockRequest
@@ -39,7 +40,7 @@ var GetRequestComplex = new MockRequest()
     .setHeader('Accept', [{key:'Application', value:'JSON'}])
     .setHeader('Accept-language', [{key:'en'}, {key:'de'}])
     .setHeader('Api-Version', '2.0')
-    .setHeader('Filter', 'location.address.postalcode > 4500, location.address.postalcode < 4500, deleted = null');
+    .setHeader('Filter', 'location.address.postalcode > 4500, location.address.postalcode < 4500, deleted = null, event.created > 100');
 
 var DeleteRequestRelated = new MockRequest()
     .setMethod('DELETE')
