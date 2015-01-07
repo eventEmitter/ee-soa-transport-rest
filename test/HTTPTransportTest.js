@@ -174,7 +174,9 @@ describe('HTTPTransport', function() {
         });
 
         it("should parse the order headers", function(done){
+            transport.off('request');
             transport.on('request', function(req, res){
+                log('halo');
                 var expected = {
                     thing: {
                         id: 'ASC'
