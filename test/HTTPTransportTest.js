@@ -65,7 +65,7 @@ describe('HTTPTransport', function() {
                 try {
                     assert.equal(testRequest.pathname, '/null');
                     assert.equal(testRequest.getHeader('api-version'), 1);
-                    assert.equal(testRequest.template, 'index.nunjucks.html');
+                    assert.equal(testRequest.template.resolve(), 'index.nunjucks.html');
 
                     responseData = data.toString();
                     done();
@@ -111,7 +111,7 @@ describe('HTTPTransport', function() {
                 try {
                     assert.equal(testRequest.pathname, '/api/');
                     assert.equal(testRequest.getHeader('api-version'), 1);
-                    assert.equal(testRequest.template, 'index.api.nunjucks.html');
+                    assert.equal(testRequest.template.resolve(), 'index.api.nunjucks.html');
 
                     responseData = data.toString();
                     done();
