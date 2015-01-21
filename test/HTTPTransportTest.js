@@ -209,6 +209,27 @@ describe('HTTPTransport', function() {
             });
             transport.testRequest(testRequest, testResponse);
         });
+
+        it("shoud parse the order headers consistent", function(done){
+            transport.off('request');
+            transport.on('request', function(req, response){
+                var order = {
+                    thing: {
+                        id: "ASC"
+                    }
+                    , category: {
+                        location: {
+                            title: "DESC"
+                            , postalcode: "ASC"
+                        }
+                    }
+                };
+
+                assert.deepEqual(order, req.getOrder());
+                done();
+            });
+            transport.testRequest(testRequest, testResponse);
+         });
     });
 
     describe('Select Headers Test', function(){
@@ -249,6 +270,7 @@ describe('HTTPTransport', function() {
             });
             transport.testRequest(testRequest, testResponse);
         });
+
     });
 
     describe('Status dependent content rendering', function(){
