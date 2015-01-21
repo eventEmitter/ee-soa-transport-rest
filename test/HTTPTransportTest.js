@@ -192,5 +192,25 @@ describe('HTTPTransport', function() {
             });
             transport.testRequest(testRequest, testResponse);
         });
+
+        it("shoudl parse the order headers repeatedly", function(done){
+            transport.off('request');
+            transport.on('request', function(req, res){
+                var expected = {
+                    thing: {
+                        id: 'ASC'
+                    }
+                    , category: {
+                        location: {
+                              title: 'DESC'
+                            , postalcode: 'ASC'
+                        }
+                    }
+                };
+                assert.deepEqual(req.getOrder(), expected);
+                done();
+            });
+            transport.testRequest(testRequest, testResponse);
+        });
     });
 });
