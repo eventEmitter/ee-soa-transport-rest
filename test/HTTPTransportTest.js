@@ -261,10 +261,10 @@ describe('HTTPTransport', function() {
 
                 assert(req.hasSubRequests());
 
-                //var   subrequests   = req.getSubRequests()
-                   // , firstLevel    = subrequests[0];
+                var   subrequests   = req.getSubRequests()
+                    , firstLevel    = subrequests[0];
 
-                //assert.equal(firstLevel.getCollection(), 'thing');
+                assert.equal(firstLevel.getCollection(), 'thing');
 
                 done();
             });
