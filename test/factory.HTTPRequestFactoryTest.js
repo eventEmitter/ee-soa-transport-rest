@@ -5,7 +5,8 @@ var testUtil        = require('./testutil')
     , MockResponse  = testUtil.HTTPMockResponse
 
     , factories         = require('../lib/factory')
-    , SOARequestHeaders = require('ee-rest-headers');
+    , SOARequestHeaders = require('ee-rest-headers')
+    , log               = require('ee-log');
 
 var GetRequest = new MockRequest()
     .setMethod('GET')
@@ -39,7 +40,8 @@ var GetRequestComplex = new MockRequest()
     .setHeader('Accept', [{key:'Application', value:'JSON'}])
     .setHeader('Accept-language', [{key:'en'}, {key:'de'}])
     .setHeader('Api-Version', '2.0')
-    .setHeader('Filter', 'location.address.postalcode > 4500, location.address.postalcode < 4500, deleted = null');
+    .setHeader('Filter', 'location.address.postalcode > 4500, location.address.postalcode < 4500, deleted = null')
+    .setHeader('Select', 'modified = dateForm("m"), deleted, location.address , location.name, location.image.first , promoter.name, location.rating = avg(event.location.cluster.rating, true, [100, 10])');
 
 var DeleteRequestRelated = new MockRequest()
     .setMethod('DELETE')
@@ -112,44 +114,103 @@ describe('HTTPRequestFactory', function(){
         });
 
         describe('on GET collection', function(){
-            factory.createUnifiedRequest(GetRequestCollection, function(err, request){
-
-                it('should not have a resource id', function(){
-                    assert(!request.hasResourceId());
+            var request;
+            it('should not generate an error', function(done){
+                factory.createUnifiedRequest(GetRequestCollection, function(err, req){
+                    assert(!err);
+                    request = req;
+                    done(err);
                 });
+            });
 
-                it('should therefore query a collection', function(){
-                    assert(request.queriesCollection());
-                });
 
-                it('should concatenate access tokens containing whitespace', function(){
-                    assert(request.hasRequestToken());
-                    assert.equal('token with whitespace', request.getRequestToken().value);
-                });
+            it('should not have a resource id', function(){
+                assert(!request.hasResourceId());
+            });
+
+            it('should therefore query a collection', function(){
+                assert(request.queriesCollection());
+            });
+
+            it('should concatenate access tokens containing whitespace', function(){
+                assert(request.hasRequestToken());
+                assert.equal('token with whitespace', request.getRequestToken().value);
             });
         });
 
         describe('on GET complex (with filters, selects and ordering), depends on the the request middleware', function(){
-            new SOARequestHeaders.Middleware().request(GetRequestComplex, null, function(){
-                factory.createUnifiedRequest(GetRequestComplex, function(err, request){
-                    it('should have filters', function(done){
-                        assert(request.hasFilters());
-                        done();
+
+            var request;
+            // use this as a guard!
+            it('should not generate an error', function(done){
+                new SOARequestHeaders.Middleware().request(GetRequestComplex, null, function() {
+                    factory.createUnifiedRequest(GetRequestComplex, function (err, req) {
+                        assert(!err);
+                        request = req;
+                        done(err);
                     });
-                });
+                })
+            });
+
+            it('should generate fields containing aggregate functions', function(){
+
+                var fields = request.getFields();
+
+                assert.strictEqual('deleted', fields[1]);
+
+                assert.equal('modified' , fields[0].alias);
+                assert.equal('dateForm' , fields[0].functionName);
+                assert.deepEqual(['m']  , fields[0].functionParameters);
+                assert.strictEqual(true , fields[0].isAlias);
+
+            });
+
+            it('should have filters', function(){
+                assert(request.hasFilters());
+            });
+
+            it('should have subrequests', function(){
+
+                assert(request.hasSubRequests());
+
+                var subrequests = request.getSubRequests();
+
+
+                assert.equal(2          , subrequests.length);
+                assert.equal('location' , subrequests[0].collection);
+
+            });
+
+            it('should generate selections with aggregate functions on subrequests', function(){
+
+                var   subrequests = request.getSubRequests()
+                    , locationSub = subrequests[0]
+                    , fields      = locationSub.getFields();
+
+                assert(locationSub);
+                assert.strictEqual('address'    , fields[0]);
+                assert.strictEqual('name'       , fields[1]);
+
+                assert.equal('rating'   , fields[2].alias);
+                assert.equal('avg'      , fields[2].functionName);
+                assert(fields[2].functionParameters[0]._isColumn);
+
             });
         });
 
         describe('on GET whit non numerical IDs', function(){
+
             factory.createUnifiedRequest(GetRequestNonNumericId, function(err, request){
                 it('should have a resource id', function(){
                     assert(!request.queriesCollection());
                     assert.equal('adlskdfj2343', request.getResourceId());
                 });
             });
+
         });
 
         describe('on DELETE related', function(){
+
             var error, req;
             it('should have a resource id', function(done){
                 factory.createUnifiedRequest(DeleteRequestRelated, function(err, request){
