@@ -36,6 +36,10 @@ var HTTPMockRequest = function(){
         return (key in this.headers) ? this.headers[key]  :  null;
     };
 
+    this.hasHeader =  function(key, parseheader){
+        return (key in this.headers);
+    };
+
     this.setHeader =  function(key, header){
         if (key.toLowerCase() === 'accept-language') this.languages = header.map(function(h) {return h.key;})
         this.headers[key.toLowerCase()] = header;

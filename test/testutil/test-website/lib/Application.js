@@ -14,6 +14,7 @@ var Application = {
         initialize.super.call(this, moduleRoot);
         this.middlewareLoaded();
         this.extensionsLoaded();
+        this.filtersLoaded();
     }
 };
 
