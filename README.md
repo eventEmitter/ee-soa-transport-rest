@@ -1,5 +1,7 @@
 #EE-SOA-Transport-Rest
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/eventEmitter/ee-soa-transport-rest.svg)](https://greenkeeper.io/)
+
 Rest specific transport implementation which converts a HTTP request to the internal request format (@see ee-soa-request)
 
 ##Behavioral Notes
