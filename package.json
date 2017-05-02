@@ -16,25 +16,25 @@
         "url"                           : "https://github.com/eventEmitter/ee-soa-transport-rest/issues"
     }
     , "dependencies": {
-          "ee-class"                    : "1.0.*"
-        , "ee-async"                    : "0.2.*"
-        , "ee-event-emitter"            : "0.1.*"
-        , "ee-webservice"               : "0.3.*"
-        , "ee-log"                      : "0.2.*"
-        , "ee-types"                    : "0.1.*"
+          "ee-class"                    : "~1.4.0"
+        , "ee-async"                    : "~0.3.1"
+        , "ee-event-emitter"            : "~1.0.1"
+        , "ee-webservice"               : "~1.0.0"
+        , "ee-log"                      : "~2.0.2"
+        , "ee-types"                    : "~2.1.2"
         , "em-formdata-collector"       : "0.2.*"
-        , "ee-rest-headers"             : "0.2.x"
+        , "ee-rest-headers"             : "~0.3.5"
         , "ee-soa-request"              : "0.2.x"
         , "ee-templates"                : "0.4.*"
         , "ee-soa-transport-rewrite"    : "0.2.*"
-        , "ee-soa-website"              : "0.1.*"
+        , "ee-soa-website"              : "~0.3.3"
         , "ee-soa-transport"            : "0.1.*"
         , "ee-soa-response"             : "0.1.*"
-        , "ee-argv"                     : "0.1.*"
+        , "ee-argv"                     : "~1.0.2"
     }
     , "devDependencies": {        
-          "mocha"                       : "1.18.*"
-        , "ee-webserver"                : "0.3.*"
+          "mocha"                       : "~3.3.0"
+        , "ee-webserver"                : "~1.0.1"
     }
     , "optionalDependencies"            : {}
     , "keywords"                        : []
